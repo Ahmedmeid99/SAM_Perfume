@@ -3940,6 +3940,11 @@ a.dropdown-item {
   font-size: 0.85rem;
 }
 
+@media (max-width:768px) {
+  .profile-username {
+    display: none !important;
+  }
+}
 .profile-chevron {
   transition: transform 0.3s ease;
 }
@@ -4102,6 +4107,14 @@ a.dropdown-item {
   margin-bottom: 1rem;
   font-weight: 700;
   color: #ffffff;
+}
+@media (max-width: 768px) {
+  .hero-compact {
+  height: 92vh;
+}
+  .hero-compact .hero-title {
+    font-size: 2rem;
+  }
 }
 
 .hero-compact .hero-desc {
@@ -5471,7 +5484,7 @@ a.dropdown-item {
   }
 
   .nav-brand-new {
-    font-size: 1.2rem !important;
+    font-size: .7rem !important;
     letter-spacing: 1px;
   }
 
@@ -5552,14 +5565,12 @@ a.dropdown-item {
     padding: 0.35rem 0.65rem !important;
   }
 
-  .profile-username {
-    display: none !important;
-  }
-
   .login-trigger-btn {
     padding: 0.4rem 0.8rem !important;
     font-size: 0.75rem !important;
   }
+
+   
 }
 
 /* ============================================================
