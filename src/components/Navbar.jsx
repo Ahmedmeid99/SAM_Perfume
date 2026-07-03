@@ -139,7 +139,14 @@ export default function Navbar() {
           {/* Logo & Location */}
           <div className="nav-left">
             <Link to="/" className="nav-brand-new">
-              {t.brand}
+              <img
+                src="/logo-1.jpeg"
+                alt={t.brand}
+                className="nav-logo-img"
+                width="48"
+                height="48"
+              />
+              <span>{t.brand}</span>
             </Link>
             <div className="location-badge">
               <MapPin size={14} className="location-icon" />

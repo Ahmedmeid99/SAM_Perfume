@@ -25,10 +25,11 @@ export default function Home() {
   // Slideshow
   const [currentSlide, setCurrentSlide] = useState(0);
   const heroImages = [
-    "/hero-1.jpg",
-    "/hero-2.jpg",
-    "/hero-3.jpg",
-    "/hero-4.jpg",
+    "/perfume-1.jpg",
+    "/perfume-2.jpg",
+    "/perfume-3.jpg",
+    "/perfume-4.jpg",
+    "/perfume-5.jpg",
   ];
 
   // Category + Products state

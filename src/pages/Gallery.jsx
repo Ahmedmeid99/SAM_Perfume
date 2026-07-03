@@ -4,13 +4,13 @@ import { GetGalleryImages } from "../api/Gallery";
 import { getImageUrl } from "../api/productHelpers";
 import { Loader2, Image as ImageIcon } from "lucide-react";
 
-const FALLBACK_GALLERY = [
-  "/perfume_pink_1776084777940.png",
-  "/perfume_obsidian_1776084817495.png",
-  "/perfume_crystal_1776084965250.png",
-  "/perfume_amber_1776085036492.png",
-  "/perfume_gold_1776084751454.png",
-];
+// const FALLBACK_GALLERY = [
+//   "/perfume_pink_1776084777940.png",
+//   "/perfume_obsidian_1776084817495.png",
+//   "/perfume_crystal_1776084965250.png",
+//   "/perfume_amber_1776085036492.png",
+//   "/perfume_gold_1776084751454.png",
+// ];
 
 export default function Gallery() {
   const { t, lang } = useLanguage();
@@ -28,12 +28,12 @@ export default function Gallery() {
           );
           setImages(sorted.map((img) => getImageUrl(img.imageUrl)));
         } else {
-          setImages(FALLBACK_GALLERY);
+          // setImages(FALLBACK_GALLERY);
         }
       })
       .catch((err) => {
         console.error("Failed to load gallery images:", err);
-        setImages(FALLBACK_GALLERY);
+        // setImages(FALLBACK_GALLERY);
       })
       .finally(() => {
         setLoading(false);

@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect, useContext } from "react";
 
 const content = {
   en: {
-    brand: "My Store",
+    brand: "SAM Perfume",
     topHot: "HOT 🔥",
     topCollaboration: "Collaboration",
     topComingSoon: "Coming Soon",
@@ -160,7 +160,7 @@ const content = {
     removedFromFavorites: "Removed from favorites",
   },
   ar: {
-    brand: "متجري",
+    brand: "سام للعطور",
     topHot: "عروض حارة 🔥",
     topCollaboration: "تعاون",
     topComingSoon: "قريباً",

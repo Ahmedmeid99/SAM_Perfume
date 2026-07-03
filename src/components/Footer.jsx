@@ -10,20 +10,12 @@ export default function Footer() {
         <div className="footer-top-grid">
           <div className="footer-col brand-col">
             <div className="footer-logo">
-              <span
-                style={{
-                  fontSize: "1.6rem",
-                  fontWeight: "700",
-                  color: "var(--primary-color)",
-                  letterSpacing: "2px",
-                  textTransform: "uppercase",
-                  display: "block",
-                  margin: "auto",
-                  width: "fit-content",
-                }}
-              >
-                {t.brand}
-              </span>
+              <img
+                src="/logo-1.jpeg"
+                alt={t.brand}
+                className="footer-logo-img"
+              />
+              <span className="footer-logo-text">{t.brand}</span>
             </div>
             <p
               className="footer-desc"
