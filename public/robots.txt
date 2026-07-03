@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api
+Disallow: /private
+Disallow: /*.json$
+
+# Delay crawl for performance
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://sam-perfume.vercel.app/sitemap.xml
+Sitemap: https://sam-perfume.vercel.app/sitemap-products.xml
+
+# Google-specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1

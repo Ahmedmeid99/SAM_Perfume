@@ -5,6 +5,7 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import { LanguageProvider } from "./context/LanguageContext";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -39,44 +40,46 @@ function ScrollToTop() {
 
 function App() {
   return (
-    <Provider store={store}>
-      <LanguageProvider>
-        <Router>
-          <div className="app">
-            <PerfumeSprayCursor />
-            <Navbar />
-            <ScrollToTop />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/process" element={<Process />} />
-              <Route path="/perfumes" element={<Perfumes />} />
-              <Route path="/sourcing" element={<Sourcing />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/my-orders" element={<MyOrders />} />
-              <Route path="/change-password" element={<ChangePassword />} />
-              <Route path="/product/:id" element={<ProductDetails />} />
-              <Route path="/favorites" element={<Favorites />} />
-              <Route
-                path="/privacy-policy"
-                element={<PolicyPage type="privacy" />}
-              />
-              <Route
-                path="/terms-of-service"
-                element={<PolicyPage type="terms" />}
-              />
-              <Route
-                path="/shipping-policy"
-                element={<PolicyPage type="shipping" />}
-              />
-            </Routes>
-            <FloatingWidgets />
-            <Footer />
-          </div>
-        </Router>
-      </LanguageProvider>
-    </Provider>
+    <HelmetProvider>
+      <Provider store={store}>
+        <LanguageProvider>
+          <Router>
+            <div className="app">
+              <PerfumeSprayCursor />
+              <Navbar />
+              <ScrollToTop />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/process" element={<Process />} />
+                <Route path="/perfumes" element={<Perfumes />} />
+                <Route path="/sourcing" element={<Sourcing />} />
+                <Route path="/gallery" element={<Gallery />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/my-orders" element={<MyOrders />} />
+                <Route path="/change-password" element={<ChangePassword />} />
+                <Route path="/product/:id" element={<ProductDetails />} />
+                <Route path="/favorites" element={<Favorites />} />
+                <Route
+                  path="/privacy-policy"
+                  element={<PolicyPage type="privacy" />}
+                />
+                <Route
+                  path="/terms-of-service"
+                  element={<PolicyPage type="terms" />}
+                />
+                <Route
+                  path="/shipping-policy"
+                  element={<PolicyPage type="shipping" />}
+                />
+              </Routes>
+              <FloatingWidgets />
+              <Footer />
+            </div>
+          </Router>
+        </LanguageProvider>
+      </Provider>
+    </HelmetProvider>
   );
 }
 

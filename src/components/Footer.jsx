@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="footer-col brand-col">
             <div className="footer-logo">
               <img
-                src="/logo-1.jpeg"
+                src="/sam-logo.jpeg"
                 alt={t.brand}
                 className="footer-logo-img"
               />

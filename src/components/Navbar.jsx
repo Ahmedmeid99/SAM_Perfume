@@ -140,7 +140,7 @@ export default function Navbar() {
           <div className="nav-left">
             <Link to="/" className="nav-brand-new">
               <img
-                src="/logo-1.jpeg"
+                src="/sam-logo.jpeg"
                 alt={t.brand}
                 className="nav-logo-img"
                 width="48"

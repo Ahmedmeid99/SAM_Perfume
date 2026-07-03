@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import { GetGalleryImages } from "../api/Gallery";
 import { getImageUrl } from "../api/productHelpers";
+import SEO from "../components/SEO";
 import { Loader2, Image as ImageIcon } from "lucide-react";
 
 // const FALLBACK_GALLERY = [
@@ -41,62 +42,74 @@ export default function Gallery() {
   }, []);
 
   return (
-    <div
-      className="gallery-page-redesigned-wrapper"
-      style={{
-        paddingTop: "140px",
-        minHeight: "100vh",
-        background: "var(--bg-color)",
-      }}
-    >
-      <div className="container">
-        {/* Page Title */}
-        <div
-          className="gallery-header animate-view reveal active"
-          style={{ marginBottom: "3rem" }}
-        >
-          <div style={{ display: "flex", gap: "0.8rem", alignItems: "center" }}>
-            <ImageIcon size={28} style={{ color: "var(--primary-color)" }} />
-            <div>
-              <h1 className="orders-main-title">
-                {t.galleryTitle ||
-                  (lang === "en" ? "Creations Gallery" : "معرض الإبداعات")}
-              </h1>
-              <p className="orders-subtitle-txt">
-                {t.galleryDesc ||
-                  (lang === "en"
-                    ? "A luxury visual journey into premium streetwear"
-                    : "رحلة بصرية في عالمنا للعطور الفاخرة")}
-              </p>
+    <>
+      <SEO
+        title="Perfume Gallery & Portfolio"
+        description="Browse our gallery of premium perfumes and fragrances. View our exclusive collection of luxury scents."
+        keywords="perfume gallery, fragrance portfolio, luxury scents, perfume photography"
+        image="https://sam-perfume.vercel.app/og-image.jpg"
+        url="https://sam-perfume.vercel.app/gallery"
+        ogType="website"
+      />
+      <div
+        className="gallery-page-redesigned-wrapper"
+        style={{
+          paddingTop: "140px",
+          minHeight: "100vh",
+          background: "var(--bg-color)",
+        }}
+      >
+        <div className="container">
+          {/* Page Title */}
+          <div
+            className="gallery-header animate-view reveal active"
+            style={{ marginBottom: "3rem" }}
+          >
+            <div
+              style={{ display: "flex", gap: "0.8rem", alignItems: "center" }}
+            >
+              <ImageIcon size={28} style={{ color: "var(--primary-color)" }} />
+              <div>
+                <h1 className="orders-main-title">
+                  {t.galleryTitle ||
+                    (lang === "en" ? "Creations Gallery" : "معرض الإبداعات")}
+                </h1>
+                <p className="orders-subtitle-txt">
+                  {t.galleryDesc ||
+                    (lang === "en"
+                      ? "A luxury visual journey into premium streetwear"
+                      : "رحلة بصرية في عالمنا للعطور الفاخرة")}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Content */}
-        {loading ? (
-          <div className="catalog-loader" style={{ padding: "6rem 0" }}>
-            <Loader2 size={40} className="spinner" />
-            <p>
-              {lang === "en" ? "Loading gallery..." : "جاري تحميل المعرض..."}
-            </p>
-          </div>
-        ) : (
-          <div className="streetwear-gallery-grid animate-view reveal active">
-            {images.map((src, index) => (
-              <div className="gallery-card-item" key={index}>
-                <div className="gallery-card-img-wrap">
-                  <img
-                    src={src}
-                    alt={`SAM Creation item ${index + 1}`}
-                    loading="lazy"
-                  />
-                  <div className="gallery-card-overlay-box"></div>
+          {/* Content */}
+          {loading ? (
+            <div className="catalog-loader" style={{ padding: "6rem 0" }}>
+              <Loader2 size={40} className="spinner" />
+              <p>
+                {lang === "en" ? "Loading gallery..." : "جاري تحميل المعرض..."}
+              </p>
+            </div>
+          ) : (
+            <div className="streetwear-gallery-grid animate-view reveal active">
+              {images.map((src, index) => (
+                <div className="gallery-card-item" key={index}>
+                  <div className="gallery-card-img-wrap">
+                    <img
+                      src={src}
+                      alt={`SAM Creation item ${index + 1}`}
+                      loading="lazy"
+                    />
+                    <div className="gallery-card-overlay-box"></div>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

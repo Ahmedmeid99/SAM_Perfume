@@ -7,6 +7,7 @@ import { addToCart } from "../redux/cartSlice";
 import { useDispatch } from "react-redux";
 import { Loader2, ChevronRight } from "lucide-react";
 import ProductCard from "../components/ProductCard";
+import SEO from "../components/SEO";
 import {
   getProductId,
   getProductName,
@@ -169,248 +170,258 @@ export default function Home() {
   );
 
   return (
-    <div className="home-redesigned-page">
-      {/* Hero Section */}
-      <section className="hero-compact">
-        {heroImages.map((src, index) => (
-          <img
-            key={index}
-            src={src}
-            alt={`SAM Perfumes product banner ${index + 1}`}
-            className="hero-bg"
-            style={{
-              opacity: index === currentSlide ? 0.45 : 0,
-              transform: index === currentSlide ? "scale(1)" : "scale(1.05)",
-              transition:
-                "opacity 1.2s ease-in-out, transform 1.2s ease-in-out",
-              zIndex: index === currentSlide ? 2 : 1,
-            }}
-          />
-        ))}
-        <div className="hero-overlay"></div>
-        <div className="container hero-content">
-          <span className="hero-subtitle">{t.heroSubtitle}</span>
-          <h1 className="hero-title">{t.heroTitle}</h1>
-          <p className="hero-desc">{t.heroDesc}</p>
-          <a href="/perfumes" className="cta-button-redesigned">
-            {t.beginJourney}
-          </a>
-        </div>
-      </section>
+    <>
+      <SEO
+        title="Premium Perfumes & Designer Fragrances"
+        description="Shop exclusive perfumes and designer fragrances at Sam Perfumes. Discover premium scents with fast delivery and authentic guarantees."
+        keywords="perfumes, fragrances, designer perfumes, luxury scents, eau de parfum, cologne"
+        image="https://sam-perfume.vercel.app/og-image.jpg"
+        url="https://sam-perfume.vercel.app"
+        ogType="website"
+      />
+      <div className="home-redesigned-page">
+        {/* Hero Section */}
+        <section className="hero-compact">
+          {heroImages.map((src, index) => (
+            <img
+              key={index}
+              src={src}
+              alt={`SAM Perfumes product banner ${index + 1}`}
+              className="hero-bg"
+              style={{
+                opacity: index === currentSlide ? 0.45 : 0,
+                transform: index === currentSlide ? "scale(1)" : "scale(1.05)",
+                transition:
+                  "opacity 1.2s ease-in-out, transform 1.2s ease-in-out",
+                zIndex: index === currentSlide ? 2 : 1,
+              }}
+            />
+          ))}
+          <div className="hero-overlay"></div>
+          <div className="container hero-content">
+            <span className="hero-subtitle">{t.heroSubtitle}</span>
+            <h1 className="hero-title">{t.heroTitle}</h1>
+            <p className="hero-desc">{t.heroDesc}</p>
+            <a href="/perfumes" className="cta-button-redesigned">
+              {t.beginJourney}
+            </a>
+          </div>
+        </section>
 
-      {/* All Categories + Products Section */}
-      <section id="catalog-section" className="catalog-section-wrapper">
-        <div className="container">
-          {/* Section Header */}
-          <div className="catalog-controls-bar">
-            <div className="catalog-title-area">
-              <h2>
-                {lang === "en" ? "Exclusive Collection" : "المجموعة الحصرية"}
-              </h2>
-              {!isLoading && (
+        {/* All Categories + Products Section */}
+        <section id="catalog-section" className="catalog-section-wrapper">
+          <div className="container">
+            {/* Section Header */}
+            <div className="catalog-controls-bar">
+              <div className="catalog-title-area">
+                <h2>
+                  {lang === "en" ? "Exclusive Collection" : "المجموعة الحصرية"}
+                </h2>
+                {!isLoading && (
+                  <p>
+                    {lang === "en"
+                      ? `${categories.length} categories · ${totalProducts} products`
+                      : `${categories.length} تصنيف · ${totalProducts} منتج`}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* Category Quick-Nav Pills */}
+            {!isLoading && categories.length > 0 && (
+              <div className="cat-quicknav-bar">
+                <div className="cat-quicknav-list">
+                  {categories.map((cat) => {
+                    const cId =
+                      cat.categoryId || cat.CategoryId || cat.productCategoryID;
+                    const cName = getCategoryName(cat);
+                    const catImg = getCategoryImage(cat);
+                    return (
+                      <button
+                        key={cId}
+                        className="cat-quicknav-pill"
+                        onClick={() => {
+                          const el = document.getElementById(
+                            `cat-section-${cId}`,
+                          );
+                          if (el)
+                            el.scrollIntoView({
+                              behavior: "smooth",
+                              block: "start",
+                            });
+                        }}
+                      >
+                        {catImg && (
+                          <span
+                            className="cat-quicknav-img"
+                            style={{ backgroundImage: `url(${catImg})` }}
+                          />
+                        )}
+                        <span className="cat-quicknav-label">{cName}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Search Query Active Badge */}
+            {searchQuery && (
+              <div
+                className="search-query-badge"
+                style={{
+                  marginBottom: "1.5rem",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  background: "var(--surface-color)",
+                  border: "1px solid var(--border-color)",
+                  padding: "0.4rem 1rem",
+                  borderRadius: "30px",
+                }}
+              >
+                <span
+                  style={{ fontSize: 0.85 + "rem", color: "var(--text-light)" }}
+                >
+                  {lang === "en" ? "Search:" : "البحث عن:"} "{searchQuery}"
+                </span>
+                <button
+                  onClick={() => navigate("/")}
+                  style={{
+                    background: "transparent",
+                    border: "none",
+                    color: "var(--text-muted)",
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    justify: "center",
+                    fontSize: "1rem",
+                    padding: "0 2px",
+                  }}
+                >
+                  ✕
+                </button>
+              </div>
+            )}
+
+            {/* Loading State */}
+            {isLoading ? (
+              <div className="catalog-loader">
+                <Loader2 className="spinner" size={40} />
                 <p>
                   {lang === "en"
-                    ? `${categories.length} categories · ${totalProducts} products`
-                    : `${categories.length} تصنيف · ${totalProducts} منتج`}
+                    ? "Loading collection..."
+                    : "جاري تحميل المجموعة..."}
                 </p>
-              )}
-            </div>
-          </div>
-
-          {/* Category Quick-Nav Pills */}
-          {!isLoading && categories.length > 0 && (
-            <div className="cat-quicknav-bar">
-              <div className="cat-quicknav-list">
-                {categories.map((cat) => {
+              </div>
+            ) : totalProducts === 0 ? (
+              <div className="catalog-empty-state">
+                <p>{t.noMatches}</p>
+              </div>
+            ) : (
+              /* Per-Category Sections */
+              <div className="categories-sections-wrapper">
+                {categories.map((cat, catIdx) => {
                   const cId =
                     cat.categoryId || cat.CategoryId || cat.productCategoryID;
                   const cName = getCategoryName(cat);
                   const catImg = getCategoryImage(cat);
+                  const prods = filteredCategoryProducts[cId] || [];
+
+                  // If searching and this category has no matches, hide the category section
+                  if (searchQuery.trim() && prods.length === 0) {
+                    return null;
+                  }
+
+                  const fallbackGradients = [
+                    "linear-gradient(135deg, #1a1200, #3d2e00)",
+                    "linear-gradient(135deg, #1a0f00, #3d2400)",
+                    "linear-gradient(135deg, #001a1a, #003d3d)",
+                    "linear-gradient(135deg, #1a001a, #3d003d)",
+                    "linear-gradient(135deg, #001a0a, #003d18)",
+                    "linear-gradient(135deg, #1a0a00, #3d1a00)",
+                  ];
+                  const gradientBg =
+                    fallbackGradients[catIdx % fallbackGradients.length];
+
                   return (
-                    <button
+                    <div
                       key={cId}
-                      className="cat-quicknav-pill"
-                      onClick={() => {
-                        const el = document.getElementById(
-                          `cat-section-${cId}`,
-                        );
-                        if (el)
-                          el.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start",
-                          });
-                      }}
+                      id={`cat-section-${cId}`}
+                      className="cat-products-section"
                     >
-                      {catImg && (
-                        <span
-                          className="cat-quicknav-img"
-                          style={{ backgroundImage: `url(${catImg})` }}
-                        />
+                      {/* Category Banner Header */}
+                      <div
+                        className="cat-section-banner"
+                        style={{ background: catImg ? undefined : gradientBg }}
+                      >
+                        {catImg && (
+                          <img
+                            src={catImg}
+                            alt={cName}
+                            className="cat-banner-bg-img"
+                          />
+                        )}
+                        <div className="cat-banner-overlay" />
+                        <div className="cat-banner-content">
+                          <span className="cat-banner-tag">
+                            {lang === "en" ? "COLLECTION" : "مجموعة"}
+                          </span>
+                          <h2 className="cat-banner-title">{cName}</h2>
+                          <span className="cat-banner-count">
+                            {prods.length} {lang === "en" ? "products" : "منتج"}
+                          </span>
+                          <Link
+                            to="/perfumes"
+                            state={{ categoryId: cId }}
+                            className="cat-banner-link"
+                          >
+                            {lang === "en" ? "View All" : "عرض الكل"}
+                            <ChevronRight size={16} />
+                          </Link>
+                        </div>
+                      </div>
+
+                      {/* Products Grid — 4 per row */}
+                      {prods.length === 0 ? (
+                        <div className="cat-no-products">
+                          <p>
+                            {lang === "en"
+                              ? "No products in this category yet."
+                              : "لا توجد منتجات في هذا التصنيف."}
+                          </p>
+                        </div>
+                      ) : (
+                        <div className="pc-grid">
+                          {prods.map((product, i) => {
+                            const id = getProductId(product, i);
+                            const name = getProductName(product, lang);
+                            const desc = getProductDesc(product, lang);
+                            const price = getProductPrice(product);
+                            const img = getProductImage(product, i);
+                            return (
+                              <ProductCard
+                                key={id}
+                                id={id}
+                                name={name}
+                                desc={desc}
+                                price={price}
+                                img={img}
+                                isLiked={wishlist.includes(id)}
+                                onToggleWishlist={toggleWishlist}
+                              />
+                            );
+                          })}
+                        </div>
                       )}
-                      <span className="cat-quicknav-label">{cName}</span>
-                    </button>
+                    </div>
                   );
                 })}
               </div>
-            </div>
-          )}
-
-          {/* Search Query Active Badge */}
-          {searchQuery && (
-            <div
-              className="search-query-badge"
-              style={{
-                marginBottom: "1.5rem",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                background: "var(--surface-color)",
-                border: "1px solid var(--border-color)",
-                padding: "0.4rem 1rem",
-                borderRadius: "30px",
-              }}
-            >
-              <span
-                style={{ fontSize: 0.85 + "rem", color: "var(--text-light)" }}
-              >
-                {lang === "en" ? "Search:" : "البحث عن:"} "{searchQuery}"
-              </span>
-              <button
-                onClick={() => navigate("/")}
-                style={{
-                  background: "transparent",
-                  border: "none",
-                  color: "var(--text-muted)",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  justify: "center",
-                  fontSize: "1rem",
-                  padding: "0 2px",
-                }}
-              >
-                ✕
-              </button>
-            </div>
-          )}
-
-          {/* Loading State */}
-          {isLoading ? (
-            <div className="catalog-loader">
-              <Loader2 className="spinner" size={40} />
-              <p>
-                {lang === "en"
-                  ? "Loading collection..."
-                  : "جاري تحميل المجموعة..."}
-              </p>
-            </div>
-          ) : totalProducts === 0 ? (
-            <div className="catalog-empty-state">
-              <p>{t.noMatches}</p>
-            </div>
-          ) : (
-            /* Per-Category Sections */
-            <div className="categories-sections-wrapper">
-              {categories.map((cat, catIdx) => {
-                const cId =
-                  cat.categoryId || cat.CategoryId || cat.productCategoryID;
-                const cName = getCategoryName(cat);
-                const catImg = getCategoryImage(cat);
-                const prods = filteredCategoryProducts[cId] || [];
-
-                // If searching and this category has no matches, hide the category section
-                if (searchQuery.trim() && prods.length === 0) {
-                  return null;
-                }
-
-                const fallbackGradients = [
-                  "linear-gradient(135deg, #1a1200, #3d2e00)",
-                  "linear-gradient(135deg, #1a0f00, #3d2400)",
-                  "linear-gradient(135deg, #001a1a, #003d3d)",
-                  "linear-gradient(135deg, #1a001a, #3d003d)",
-                  "linear-gradient(135deg, #001a0a, #003d18)",
-                  "linear-gradient(135deg, #1a0a00, #3d1a00)",
-                ];
-                const gradientBg =
-                  fallbackGradients[catIdx % fallbackGradients.length];
-
-                return (
-                  <div
-                    key={cId}
-                    id={`cat-section-${cId}`}
-                    className="cat-products-section"
-                  >
-                    {/* Category Banner Header */}
-                    <div
-                      className="cat-section-banner"
-                      style={{ background: catImg ? undefined : gradientBg }}
-                    >
-                      {catImg && (
-                        <img
-                          src={catImg}
-                          alt={cName}
-                          className="cat-banner-bg-img"
-                        />
-                      )}
-                      <div className="cat-banner-overlay" />
-                      <div className="cat-banner-content">
-                        <span className="cat-banner-tag">
-                          {lang === "en" ? "COLLECTION" : "مجموعة"}
-                        </span>
-                        <h2 className="cat-banner-title">{cName}</h2>
-                        <span className="cat-banner-count">
-                          {prods.length} {lang === "en" ? "products" : "منتج"}
-                        </span>
-                        <Link
-                          to="/perfumes"
-                          state={{ categoryId: cId }}
-                          className="cat-banner-link"
-                        >
-                          {lang === "en" ? "View All" : "عرض الكل"}
-                          <ChevronRight size={16} />
-                        </Link>
-                      </div>
-                    </div>
-
-                    {/* Products Grid — 4 per row */}
-                    {prods.length === 0 ? (
-                      <div className="cat-no-products">
-                        <p>
-                          {lang === "en"
-                            ? "No products in this category yet."
-                            : "لا توجد منتجات في هذا التصنيف."}
-                        </p>
-                      </div>
-                    ) : (
-                      <div className="pc-grid">
-                        {prods.map((product, i) => {
-                          const id = getProductId(product, i);
-                          const name = getProductName(product, lang);
-                          const desc = getProductDesc(product, lang);
-                          const price = getProductPrice(product);
-                          const img = getProductImage(product, i);
-                          return (
-                            <ProductCard
-                              key={id}
-                              id={id}
-                              name={name}
-                              desc={desc}
-                              price={price}
-                              img={img}
-                              isLiked={wishlist.includes(id)}
-                              onToggleWishlist={toggleWishlist}
-                            />
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
-      </section>
-    </div>
+            )}
+          </div>
+        </section>
+      </div>
+    </>
   );
 }
